@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>D:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>D:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
