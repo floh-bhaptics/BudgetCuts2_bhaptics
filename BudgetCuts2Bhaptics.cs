@@ -34,7 +34,7 @@ namespace BudgetCuts2Bhaptics
 {
     public class BudgetCuts2Bhaptics : MelonMod
     {
-        public static TactsuitVR tactsuitVr;
+        public static TactsuitVR tactsuitVr = null!;
 
         public override void OnInitializeMelon()
         {
