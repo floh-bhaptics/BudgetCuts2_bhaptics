@@ -22,7 +22,7 @@ namespace MyBhapticsTactsuit
             while (true)
             {
                 HeartBeat_mrse.WaitOne();
-                bHaptics.SubmitRegistered("HeartBeat");
+                bHapticsLib.bHapticsManager.PlayRegistered("HeartBeat");
                 Thread.Sleep(1000);
             }
         }
@@ -32,7 +32,7 @@ namespace MyBhapticsTactsuit
             while (true)
             {
                 NeckTingle_mrse.WaitOne();
-                bHaptics.SubmitRegistered("NeckTingleShort");
+                bHapticsLib.bHapticsManager.PlayRegistered("NeckTingleShort");
                 Thread.Sleep(2050);
             }
         }
@@ -40,10 +40,7 @@ namespace MyBhapticsTactsuit
         public TactsuitVR()
         {
             LOG("Initializing suit");
-            if (!bHaptics.WasError)
-            {
-                suitDisabled = false;
-            }
+            suitDisabled = false;
             RegisterAllTactFiles();
             LOG("Starting HeartBeat and NeckTingle thread...");
             Thread HeartBeatThread = new Thread(HeartBeatFunc);
@@ -75,7 +72,7 @@ namespace MyBhapticsTactsuit
                 string tactFileStr = File.ReadAllText(fullName);
                 try
                 {
-                    bHaptics.RegisterFeedbackFromTactFile(prefix, tactFileStr);
+                    bHapticsLib.bHapticsManager.RegisterPatternFromJson(prefix, tactFileStr);
                     LOG("Pattern registered: " + prefix);
                 }
                 catch (Exception e) { LOG(e.ToString()); }
@@ -92,15 +89,15 @@ namespace MyBhapticsTactsuit
             {
                 if ((intensity != 1.0f)|(duration != 1.0f))
                 {
-                    bHaptics.ScaleOption scaleOption = new bHaptics.ScaleOption(intensity, duration);
+                    bHapticsLib.ScaleOption scaleOption = new bHapticsLib.ScaleOption(intensity, duration);
                     //float locationAngle = 0.0f;
                     //float locationHeight = 0.0f;
-                    //bHaptics.RotationOption rotationOption = new bHaptics.RotationOption(locationAngle, locationHeight);
-                    bHaptics.SubmitRegistered(key, key, scaleOption);
+                    //bHapticsLib.RotationOption rotationOption = new bHapticsLib.RotationOption(locationAngle, locationHeight);
+                    bHapticsLib.bHapticsManager.PlayRegistered(key, key, scaleOption);
                 }
                 
                 // LOG("Playing back: " + key);
-                bHaptics.SubmitRegistered(key);
+                bHapticsLib.bHapticsManager.PlayRegistered(key);
             }
             else
             {
@@ -130,7 +127,7 @@ namespace MyBhapticsTactsuit
 
         public void StopHapticFeedback(String effect)
         {
-            bHaptics.TurnOff(effect);
+            bHapticsLib.bHapticsManager.StopPlaying(effect);
         }
 
         public void StopAllHapticFeedback()
@@ -139,7 +136,7 @@ namespace MyBhapticsTactsuit
             StopNeckTingle();
             foreach (String key in FeedbackMap.Keys)
             {
-                bHaptics.TurnOff(key);
+                bHapticsLib.bHapticsManager.StopPlaying(key);
             }
         }
 

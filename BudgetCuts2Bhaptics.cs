@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using MelonLoader;
 using HarmonyLib;
-
+using Il2Cpp;
 using MyBhapticsTactsuit;
 
 /*
@@ -26,6 +26,8 @@ NPCAdamNoLegs.GetCrushed
 NPCAdamBC2.FallIntoShredder
 AdamBC2State.SelectAggressiveState
  */
+[assembly: MelonInfo(typeof(BudgetCuts2Bhaptics.BudgetCuts2Bhaptics), "BudgetCuts2Bhaptics", "1.0.1", "Florian Fahrenberger")]
+[assembly: MelonGame("Neat Corporation", "Budget Cuts 2")]
 
 
 namespace BudgetCuts2Bhaptics
@@ -34,9 +36,9 @@ namespace BudgetCuts2Bhaptics
     {
         public static TactsuitVR tactsuitVr;
 
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
-            base.OnApplicationStart();
+            //base.OnApplicationStart();
             tactsuitVr = new TactsuitVR();
             tactsuitVr.PlaybackHaptics("HeartBeat");
         }
@@ -356,7 +358,7 @@ namespace BudgetCuts2Bhaptics
             {
                 tactsuitVr.StopHeartBeat();
                 tactsuitVr.StopNeckTingle();
-                if (bHaptics.IsDeviceConnected(bHaptics.DeviceType.Tactal))
+                if (bHapticsLib.bHapticsManager.IsDeviceConnected(bHapticsLib.PositionID.Head))
                 { tactsuitVr.PlaybackHaptics("HitInTheFace"); }
                 else { tactsuitVr.PlaybackHaptics("BulletHit"); }
             }
