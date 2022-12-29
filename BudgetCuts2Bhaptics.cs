@@ -26,7 +26,7 @@ NPCAdamNoLegs.GetCrushed
 NPCAdamBC2.FallIntoShredder
 AdamBC2State.SelectAggressiveState
  */
-[assembly: MelonInfo(typeof(BudgetCuts2Bhaptics.BudgetCuts2Bhaptics), "BudgetCuts2Bhaptics", "1.0.1", "Florian Fahrenberger")]
+[assembly: MelonInfo(typeof(BudgetCuts2Bhaptics.BudgetCuts2Bhaptics), "BudgetCuts2Bhaptics", "2.0.0", "Florian Fahrenberger")]
 [assembly: MelonGame("Neat Corporation", "Budget Cuts 2")]
 
 
