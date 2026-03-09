@@ -9,6 +9,7 @@ using HarmonyLib;
 using Il2Cpp;
 using MyBhapticsTactsuit;
 
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 /*
 CrushingtBulbStateAdamBC2
 FightingStateAdamBC2
@@ -26,7 +27,7 @@ NPCAdamNoLegs.GetCrushed
 NPCAdamBC2.FallIntoShredder
 AdamBC2State.SelectAggressiveState
  */
-[assembly: MelonInfo(typeof(BudgetCuts2Bhaptics.BudgetCuts2Bhaptics), "BudgetCuts2Bhaptics", "2.0.0", "Florian Fahrenberger")]
+[assembly: MelonInfo(typeof(BudgetCuts2Bhaptics.BudgetCuts2Bhaptics), "BudgetCuts2Bhaptics", "2.1.0", "Florian Fahrenberger")]
 [assembly: MelonGame("Neat Corporation", "Budget Cuts 2")]
 
 
@@ -109,8 +110,8 @@ namespace BudgetCuts2Bhaptics
                 tactsuitVr.StopNeckTingle();
             }
         }
-
-        [HarmonyPatch(typeof(ChasingStateAdamBC2), "EnterState")]
+        
+        [HarmonyPatch(typeof(ChasingStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
         public class bhaptics_AdamChasingStart
         {
             [HarmonyPostfix]
@@ -119,8 +120,9 @@ namespace BudgetCuts2Bhaptics
                 tactsuitVr.StartHeartBeat();
             }
         }
-
-        [HarmonyPatch(typeof(RidingElevatorStateAdamBC2), "EnterState")]
+        
+        
+        [HarmonyPatch(typeof(RidingElevatorStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
         public class bhaptics_AdamElevatorStart
         {
             [HarmonyPostfix]
@@ -129,8 +131,9 @@ namespace BudgetCuts2Bhaptics
                 tactsuitVr.StartHeartBeat();
             }
         }
-
-        [HarmonyPatch(typeof(SearchingStateAdamBC2), "EnterState")]
+        
+        
+        [HarmonyPatch(typeof(SearchingStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
         public class bhaptics_AdamSearchingStart
         {
             [HarmonyPostfix]
@@ -140,7 +143,7 @@ namespace BudgetCuts2Bhaptics
                 tactsuitVr.StartNeckTingle();
             }
         }
-
+        
         [HarmonyPatch(typeof(SearchingStateAdamBC2), "ExitState")]
         public class bhaptics_AdamSearchingStop
         {
@@ -200,7 +203,7 @@ namespace BudgetCuts2Bhaptics
             }
         }
 
-        [HarmonyPatch(typeof(ChasingStateBSB), "EnterState")]
+        [HarmonyPatch(typeof(ChasingStateBSB), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
         public class bhaptics_BSBChasingStart
         {
             [HarmonyPostfix]
@@ -221,7 +224,7 @@ namespace BudgetCuts2Bhaptics
             }
         }
 
-        [HarmonyPatch(typeof(ChasingStateHornet), "EnterState")]
+        [HarmonyPatch(typeof(ChasingStateHornet), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
         public class bhaptics_HornetChasingStart
         {
             [HarmonyPostfix]
@@ -242,7 +245,7 @@ namespace BudgetCuts2Bhaptics
             }
         }
 
-        [HarmonyPatch(typeof(ChasingStateRSB), "EnterState")]
+        [HarmonyPatch(typeof(ChasingStateRSB), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
         public class bhaptics_RSBChasingStart
         {
             [HarmonyPostfix]

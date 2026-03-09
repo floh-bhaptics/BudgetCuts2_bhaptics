@@ -30,6 +30,18 @@
       <HintPath>D:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\net6\bHapticsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>D:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>D:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>D:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="MelonLoader">
       <HintPath>D:\Games\Steam\steamapps\common\Budget Cuts 2 Mission Insolvency\MelonLoader\net6\MelonLoader.dll</HintPath>
       <Private>False</Private>
