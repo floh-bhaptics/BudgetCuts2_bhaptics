@@ -27,7 +27,7 @@ NPCAdamNoLegs.GetCrushed
 NPCAdamBC2.FallIntoShredder
 AdamBC2State.SelectAggressiveState
  */
-[assembly: MelonInfo(typeof(BudgetCuts2Bhaptics.BudgetCuts2Bhaptics), "BudgetCuts2Bhaptics", "2.1.0", "Florian Fahrenberger")]
+[assembly: MelonInfo(typeof(BudgetCuts2Bhaptics.BudgetCuts2Bhaptics), "BudgetCuts2Bhaptics", "2.1.1", "Florian Fahrenberger")]
 [assembly: MelonGame("Neat Corporation", "Budget Cuts 2")]
 
 
@@ -54,6 +54,122 @@ namespace BudgetCuts2Bhaptics
                     }
                 }
         */
+        
+        [HarmonyPatch(typeof(ChasingStateRSB), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
+        public class bhaptics_RSBChasingStart
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                //tactsuitVr.StartNeckTingle();
+                tactsuitVr.PlaybackHaptics("NeckTingleShort");
+            }
+        }
+
+        [HarmonyPatch(typeof(ChasingStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
+        public class bhaptics_AdamChasingStart
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                //tactsuitVr.StartHeartBeat();
+                tactsuitVr.PlaybackHaptics("NeckTingleShort");
+                tactsuitVr.PlaybackHaptics("HeartBeat");
+            }
+        }
+
+
+        [HarmonyPatch(typeof(RidingElevatorStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
+        public class bhaptics_AdamElevatorStart
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                //tactsuitVr.StartHeartBeat();
+                tactsuitVr.PlaybackHaptics("NeckTingleShort");
+                tactsuitVr.PlaybackHaptics("HeartBeat");
+            }
+        }
+
+
+        [HarmonyPatch(typeof(SearchingStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
+        public class bhaptics_AdamSearchingStart
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.StopHeartBeat();
+                tactsuitVr.PlaybackHaptics("NeckTingleShort");
+                //tactsuitVr.StartNeckTingle();
+            }
+        }
+
+        [HarmonyPatch(typeof(ChasingStateBSB), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
+        public class bhaptics_BSBChasingStart
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.PlaybackHaptics("NeckTingleShort");
+                //tactsuitVr.StartNeckTingle();
+            }
+        }
+
+        [HarmonyPatch(typeof(ChasingStateHornet), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
+        public class bhaptics_HornetChasingStart
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.PlaybackHaptics("NeckTingleShort");
+                //tactsuitVr.StartNeckTingle();
+            }
+        }
+        
+
+        /*
+        [HarmonyPatch(typeof(SearchingStateAdamBC2), "ExitState", new Type[] { typeof(NPCState) })]
+        public class bhaptics_AdamSearchingStop
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.StopNeckTingle();
+            }
+        }
+
+        [HarmonyPatch(typeof(ChasingStateBSB), "ExitState", new Type[] { typeof(NPCState) })]
+        public class bhaptics_BSBChasingStop
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.StopNeckTingle();
+            }
+        }
+
+        [HarmonyPatch(typeof(ChasingStateHornet), "ExitState", new Type[] { typeof(NPCState) })]
+        public class bhaptics_HornetChasingStop
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.StopNeckTingle();
+            }
+        }
+
+        [HarmonyPatch(typeof(ChasingStateRSB), "ExitState", new Type[] { typeof(NPCState) })]
+        public class bhaptics_RSBChasingStop
+        {
+            [HarmonyPostfix]
+            public static void Postfix()
+            {
+                tactsuitVr.StopNeckTingle();
+            }
+        }
+        */
+
+
         [HarmonyPatch(typeof(Player), "OnCrushed")]
         public class bhaptics_PlayerStrangled
         {
@@ -111,49 +227,6 @@ namespace BudgetCuts2Bhaptics
             }
         }
         
-        [HarmonyPatch(typeof(ChasingStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
-        public class bhaptics_AdamChasingStart
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StartHeartBeat();
-            }
-        }
-        
-        
-        [HarmonyPatch(typeof(RidingElevatorStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
-        public class bhaptics_AdamElevatorStart
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StartHeartBeat();
-            }
-        }
-        
-        
-        [HarmonyPatch(typeof(SearchingStateAdamBC2), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
-        public class bhaptics_AdamSearchingStart
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StopHeartBeat();
-                tactsuitVr.StartNeckTingle();
-            }
-        }
-        
-        [HarmonyPatch(typeof(SearchingStateAdamBC2), "ExitState")]
-        public class bhaptics_AdamSearchingStop
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StopNeckTingle();
-            }
-        }
-
         [HarmonyPatch(typeof(FabLightBulb), "OnDestroy")]
         public class bhaptics_AdamCrushingBulb
         {
@@ -198,71 +271,7 @@ namespace BudgetCuts2Bhaptics
             [HarmonyPostfix]
             public static void Postfix()
             {
-                tactsuitVr.LOG("OpenSesame");
                 tactsuitVr.PlaybackHaptics("Stomp", 1.0f, 3.0f);
-            }
-        }
-
-        [HarmonyPatch(typeof(ChasingStateBSB), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
-        public class bhaptics_BSBChasingStart
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StartNeckTingle();
-            }
-        }
-
-
-        [HarmonyPatch(typeof(ChasingStateBSB), "ExitState")]
-        public class bhaptics_BSBChasingStop
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StopNeckTingle();
-            }
-        }
-
-        [HarmonyPatch(typeof(ChasingStateHornet), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
-        public class bhaptics_HornetChasingStart
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StartNeckTingle();
-            }
-        }
-
-
-        [HarmonyPatch(typeof(ChasingStateHornet), "ExitState")]
-        public class bhaptics_HornetChasingStop
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StopNeckTingle();
-            }
-        }
-
-        [HarmonyPatch(typeof(ChasingStateRSB), "EnterState", new Type[] { typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
-        public class bhaptics_RSBChasingStart
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StartNeckTingle();
-            }
-        }
-
-
-        [HarmonyPatch(typeof(ChasingStateRSB), "ExitState")]
-        public class bhaptics_RSBChasingStop
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                tactsuitVr.StopNeckTingle();
             }
         }
 
